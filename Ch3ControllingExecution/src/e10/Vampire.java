@@ -1,5 +1,6 @@
 package e10;
 
+
 class Vampire {
 
     public static void findVampire(String x, String s, int vampire) {
@@ -10,16 +11,15 @@ class Vampire {
                 int leftPart = Integer.parseInt(x.substring(0, 2));
                 int rightPart = Integer.parseInt(x.substring(2));
                 if (leftPart * rightPart == vampire) {
-                    System.out.println(vampire + " = " + leftPart + " * " + rightPart);
+                    System.out.println(leftPart + " * " + rightPart + " = " + vampire);
                 }
-
             }
         }
     }
 
     public static void main(String[] args) {
         System.out.println("The vampire numbers are: ");
-        for (int i = 1001; i < 10000; i++) {
+        for (int i = 1001; i < 9999; i++) {
             findVampire("", Integer.toString(i), i);
         }
     }

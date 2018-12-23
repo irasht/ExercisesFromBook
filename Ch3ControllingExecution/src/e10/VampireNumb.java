@@ -1,29 +1,36 @@
 package e10;
 
-import java.util.*;
 
 public class VampireNumb {
     public static void main(String[] args) {
-        for (int x = 10; x < 100; x++) {
-            String sx = String.valueOf(x);
-            for (int y = x; y < 100; y++) {
-                int vampire = x * y;
-                String sy = String.valueOf(y);
-                String sv = String.valueOf(vampire);
-                if (sortVampire(sx + sy).equals(sortVampire(sv))) {
-                    System.out.println(x + " * " + y + " = " + vampire);
+        int[] startDigit = new int[4];
+        int[] productDigit = new int[4];
+        for (int num1 = 10; num1 < 100; num1++) {
+            for (int num2 = num1; num2 < 100; num2++) {
+                if ((num1 * num2) % 9 != (num1 + num2) % 9)
+                    continue;
+                int product = num1 * num2;
+                startDigit[0] = num1 / 10;
+                startDigit[1] = num1 % 10;
+                startDigit[2] = num2 / 10;
+                startDigit[3] = num2 % 10;
+                productDigit[0] = product / 1000;
+                productDigit[1] = (product % 1000) / 100;
+                productDigit[2] = product % 1000 % 100 / 10;
+                productDigit[3] = product % 1000 % 100 % 10;
+                int count = 0;
+                for (int x = 0; x < 4; x++) {
+                    for (int y = 0; y < 4; y++) {
+                        if (productDigit[x] == startDigit[y]) {
+                            count++;
+                            productDigit[x] = -1;
+                            startDigit[y] = -2;
+                            if (count == 4)
+                                System.out.println(num1 + " * " + num2 + " : " + product);
+                        }
+                    }
                 }
             }
         }
-    }
-
-    private static List<Character> sortVampire(String vampire) {
-        System.out.println("The vampire numbers are: ");
-        List<Character> vampireNumber = new ArrayList<Character>();
-        for (int i = 0; i < vampire.length(); i++) {
-            vampireNumber.add(vampire.charAt(i));
-        }
-        Collections.sort(vampireNumber);
-        return vampireNumber;
     }
 }
